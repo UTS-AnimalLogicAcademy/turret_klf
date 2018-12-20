@@ -59,7 +59,7 @@ public:
 
             if(resolvedPath == "NOT_FOUND") {
 
-                const char* env_p = std::getenv("ALA_AUTOLOOKFILEASSIGN_LOG_LEVEL");
+                const char* env_p = std::getenv("TURRET_AUTOLOOKFILEASSIGN_LOG_LEVEL");
                 const std::string env_s = std::string(env_p);
                 if (env_s == "1"){
                     std::cout << "ALA Lookfile Resolver - Tank query failed to resolve file." << std::endl;

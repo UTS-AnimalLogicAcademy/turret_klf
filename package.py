@@ -2,7 +2,7 @@
 
 name = 'turret_klf'
 
-version = '0.1.0'
+version = '1.0.0'
 
 authors = ['daniel.flood']
 
@@ -18,6 +18,6 @@ variants = [
 
 def commands():
     env.KATANA_RESOURCES.append('{root}/Resources')
-    env.ALA_AUTOLOOKFILEASSIGN_LOG_LEVEL.set("1")
+    env.TURRET_AUTOLOOKFILEASSIGN_LOG_LEVEL.set("1")
     env.ZMQ_CACHE_QUERIES.set("1")
     env.ZMQ_CACHE_EXTERNAL.set("1")
