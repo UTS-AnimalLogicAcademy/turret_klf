@@ -1,22 +1,12 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.2)
 
-include(RezBuild)
+set (CMAKE_CXX_STANDARD 11)
 
-FILE(GLOB_RECURSE py_files "python/*.py")
-
-rez_install_python(
-	py_files
-	FILES
-	${py_files}
-	DESTINATION .
-    LOCAL_SYMLINK
+set(CMAKE_MODULE_PATH
+        ${CMAKE_MODULE_PATH}
+        ${CMAKE_SOURCE_DIR}/cmake/modules
+        "${KATANA_HOME}/plugins/Src/cmake"        
 )
-
-rez_install_dirs(
-    Resources
-    DESTINATION .
-)
-
 
 set(KATANA_HOME "$ENV{KATANA_HOME}" CACHE PATH "Path to Katana")
 

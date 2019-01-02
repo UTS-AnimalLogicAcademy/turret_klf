@@ -13,11 +13,11 @@ using namespace std;
 
 #include <FnGeolibServices/FnGeolibCookInterfaceUtilsService.h>
 
-
-#include <zmq_client_cpp/zmqClient.h>
+#include <turretClient.h>
+#include <turretLogger.h>
 
 namespace { //anonymous
-    zmq_client::zmqClient g_zmq("klf");
+    turret_client::turretClient g_zmq("klf");
 
 class AutoLookfileAssignOp : public Foundry::Katana::GeolibOp
 {
