@@ -1,22 +1,26 @@
-set(CMAKE_MODULE_PATH
-        ${CMAKE_MODULE_PATH}
-        "/mnt/ala/software/pipeline/rez/lib/python2.6/site-packages/rez-2.2.0-py2.6.egg/rezplugins/build_system/cmake_files"
-        "$ENV{REZ_UTSALA_CMAKE_MODULES_ROOT}/cmake/Modules"
-        "${KATANA_HOME}/plugins/Src/cmake"
+find_package(Turret REQUIRED)
+find_package(ZeroMQ REQUIRED)
+
+find_package(Boost
+        COMPONENTS
+        filesystem
+        serialization
+        REQUIRED
         )
 
-#file(GLOB SOURCES src/zmqClient.h src/zmqClient.cpp)
-include_directories($ENV{ZMQ_CLIENT_INCLUDE} $ENV{BOOST_ROOT}/include)
-add_library(AutoLookfileAssign MODULE src/autoLookfileAssignOp.cpp)
+include_directories(
+        ${TURRET_INCLUDES}
+        ${CMAKE_SOURCE_DIR}/AutoLookfileAssign/
+        ${Boost_INCLUDE_DIRS}
+        )
 
-# to do - link against libzmq library
-# link_directories($ENV{REZ_LIBZMQ_ROOT}/lib)
-# link against libzmq.so
+add_library(AutoLookfileAssign MODULE src/autoLookfileAssignOp.cpp)
 
 target_link_libraries(AutoLookfileAssign
     PRIVATE
-    #/mnt/ala/software/ext_packages/libzmq/4.2.3/lib/libzmq.so
-    $ENV{ZMQ_CLIENT_LIB}/libzmq_client_cpp.so
+    ${ZeroMQ_LIBRARY}
+    ${Boost_LIBRARIES}
+    ${TURRET_LIBRARY}
     Katana::FnAttribute
     Katana::FnGeolibOpPlugin
     Katana::FnGeolibServices

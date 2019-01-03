@@ -13,11 +13,11 @@ using namespace std;
 
 #include <FnGeolibServices/FnGeolibCookInterfaceUtilsService.h>
 
-
-#include <zmq_client_cpp/zmqClient.h>
+#include <turretClient.h>
+#include <turretLogger.h>
 
 namespace { //anonymous
-    zmq_client::zmqClient g_zmq("klf");
+    turret_client::turretClient g_zmq("klf");
 
 class AutoLookfileAssignOp : public Foundry::Katana::GeolibOp
 {
@@ -59,7 +59,7 @@ public:
 
             if(resolvedPath == "NOT_FOUND") {
 
-                const char* env_p = std::getenv("ALA_AUTOLOOKFILEASSIGN_LOG_LEVEL");
+                const char* env_p = std::getenv("TURRET_AUTOLOOKFILEASSIGN_LOG_LEVEL");
                 const std::string env_s = std::string(env_p);
                 if (env_s == "1"){
                     std::cout << "ALA Lookfile Resolver - Tank query failed to resolve file." << std::endl;
