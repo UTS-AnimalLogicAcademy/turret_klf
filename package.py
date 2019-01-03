@@ -4,7 +4,7 @@ name = 'turret_klf'
 
 version = '1.0.0'
 
-authors = ['daniel.flood']
+authors = ['daniel.flood', 'ben.skinner', 'wen.tan']
 
 build_requires = [
                   'python',
