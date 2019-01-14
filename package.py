@@ -21,5 +21,5 @@ variants = [
 def commands():
     env.KATANA_RESOURCES.append('{root}/Resources')
     env.TURRET_AUTOLOOKFILEASSIGN_LOG_LEVEL.set("1")
-    env.ZMQ_CACHE_QUERIES.set("1")
-    env.ZMQ_CACHE_EXTERNAL.set("1")
+
+    env.TURRET_CACHE_EXTERNAL.set("1")
