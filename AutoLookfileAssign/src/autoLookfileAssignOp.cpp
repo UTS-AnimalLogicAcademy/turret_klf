@@ -74,7 +74,8 @@ public:
             // -- Begin querying
             std::string resolvedPath = g_turretClient.resolve_name(query);
 
-            if(resolvedPath == "NOT_FOUND") {
+            if(resolvedPath == "Unable to parse query") {
+//            if(resolvedPath == "NOT_FOUND") {
 
                 const char* env_p = std::getenv("TURRET_AUTOLOOKFILEASSIGN_LOG_LEVEL");
                 const std::string env_s = std::string(env_p);
