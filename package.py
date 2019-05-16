@@ -8,7 +8,7 @@ authors = ['daniel.flood', 'ben.skinner', 'wen.tan']
 
 build_requires = [
                   'python',
-                  'turret_lib',
+                  'turret_lib-0.0.5+<1',
                   'cmake-3.2'
            ]
 

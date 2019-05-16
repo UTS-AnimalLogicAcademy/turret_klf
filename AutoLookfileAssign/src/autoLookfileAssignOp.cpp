@@ -75,14 +75,15 @@ public:
             std::string resolvedPath = g_turretClient.resolve_name(query);
 
             if(resolvedPath == "Unable to parse query") {
-//            if(resolvedPath == "NOT_FOUND") {
-
                 const char* env_p = std::getenv("TURRET_AUTOLOOKFILEASSIGN_LOG_LEVEL");
                 const std::string env_s = std::string(env_p);
                 if (env_s == "1"){
                     std::cout << "ALA Lookfile Resolver - Tank query failed to resolve file." << std::endl;
                 }
+                return;
+            }
 
+            if(resolvedPath == "uncached_query") {
                 return;
             }
 
