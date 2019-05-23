@@ -62,9 +62,6 @@ public:
         if(usdLookFileURI.isValid()) {
             query = usdLookFileURI.getValue();
 
-            //if(query.find("=set&")!=std::string::npos)
-            //    return;
-
             // Check USD_ASSET_TIME env var
             if(const char* envUsdAssetTime = std::getenv("USD_ASSET_TIME")) {
                 // If time var exists, append asset time to query
