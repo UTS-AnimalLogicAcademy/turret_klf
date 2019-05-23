@@ -2,7 +2,7 @@
 
 This library, **turret_klf**, allows us to automatically assign Katana look files to USD assets. We embed a turret query on each USD model when published which resolves to the associated Katana look file.
 
-This is one of the projects which uses **turret_lib**, the other being **turref_usd** (Universal Scene Description).  
+This is one of the projects which uses [turret_lib](https://github.com/UTS-AnimalLogicAcademy/turret_lib), the other being [turref_usd](https://github.com/UTS-AnimalLogicAcademy/turret_usd).  
 
 ## Building
 
