@@ -6,13 +6,13 @@ find_package(Boost
         filesystem
         serialization
         REQUIRED
-        )
+)
 
 include_directories(
         ${TURRET_INCLUDES}
         ${CMAKE_SOURCE_DIR}/AutoLookfileAssign/
         ${Boost_INCLUDE_DIRS}
-        )
+)
 
 add_library(AutoLookfileAssign MODULE src/autoLookfileAssignOp.cpp)
 

@@ -10,7 +10,7 @@ build_requires = [
                   'python',
                   'turret_lib',
                   'cmake-3.2'
-           ]
+]
 
 variants = [
     ['platform-linux', 'arch-x86_64', 'katana-3.0.1'],
