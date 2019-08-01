@@ -2,13 +2,13 @@
 
 name = 'turret_klf'
 
-version = '1.1.0'
+version = '1.1.1'
 
 authors = ['daniel.flood', 'ben.skinner', 'wen.tan']
 
 build_requires = [
                   'python',
-                  'turret_lib-0.0.5+<1',
+                  'turret_lib-1+<2',
                   'cmake-3.2'
 ]
 
