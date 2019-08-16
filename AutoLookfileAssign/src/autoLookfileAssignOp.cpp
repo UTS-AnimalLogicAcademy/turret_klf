@@ -62,10 +62,10 @@ public:
         if(usdLookFileURI.isValid()) {
             query = usdLookFileURI.getValue();
 
-            // Check KLF_ASSET_TIME env var
-            if(const char* envKlfAssetTime = std::getenv("KLF_ASSET_TIME")) {
+            // Check USD_ASSET_TIME env var
+            if(const char* envUsdAssetTime = std::getenv("USD_ASSET_TIME")) {
                 // If time var exists, append asset time to query
-                query += "&time=" + std::string(envKlfAssetTime);
+                query += "&time=" + std::string(envUsdAssetTime);
             }
 
             // -- Begin querying
