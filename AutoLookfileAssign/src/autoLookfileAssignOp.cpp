@@ -87,7 +87,6 @@ public:
             FnAttribute::StringAttribute klfFilePath = FnAttribute::StringAttribute(resolvedPath);
 
             interface.setAttr("lookfile.asset", klfFilePath);
-            interface.stopChildTraversal();
             return;
         }
 
