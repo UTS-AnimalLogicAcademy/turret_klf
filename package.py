@@ -2,7 +2,7 @@
 
 name = 'turret_klf'
 
-version = '1.1.5'
+version = '1.1.6'
 
 authors = ['daniel.flood', 'ben.skinner', 'wen.tan']
 

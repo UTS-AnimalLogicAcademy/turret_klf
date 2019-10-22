@@ -56,6 +56,8 @@ public:
     static void cook(Foundry::Katana::GeolibCookInterface & interface)
     {
         FnAttribute::StringAttribute usdLookFileURI = interface.getAttr("userProperties.lookfileUri", interface.getOutputLocationPath());
+        FnAttribute::StringAttribute outputLocationPath = interface.getOutputLocationPath();
+        FnAttribute::StringAttribute inputLocationPath = interface.getInputLocationPath();
 
         std::string query;
 
@@ -87,6 +89,10 @@ public:
             FnAttribute::StringAttribute klfFilePath = FnAttribute::StringAttribute(resolvedPath);
 
             interface.setAttr("lookfile.asset", klfFilePath);
+
+            // set an additional renderman attribute, useful for cyrptomatte:
+            interface.setAttr("prmanStatements.attributes.user.lookfile", klfFilePath);
+            interface.setAttr("prmanStatements.attributes.user.assetRoot", outputLocationPath);
             return;
         }
 
