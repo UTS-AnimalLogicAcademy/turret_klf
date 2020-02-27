@@ -2,7 +2,7 @@
 
 name = 'turret_klf'
 
-version = '1.1.6'
+version = '1.1.7'
 
 authors = ['daniel.flood', 'ben.skinner', 'wen.tan']
 
@@ -15,7 +15,8 @@ build_requires = [
 variants = [
     ['platform-linux', 'arch-x86_64', 'katana-3.0.1'],
     ['platform-linux', 'arch-x86_64', 'katana-3.0.7'],
-    ['platform-linux', 'arch-x86_64', 'katana-3.1.1']
+    ['platform-linux', 'arch-x86_64', 'katana-3.1.1'],
+    ['platform-linux', 'arch-x86_64', 'katana-3.5.1']
 ]
 
 def commands():
