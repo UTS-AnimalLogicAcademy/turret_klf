@@ -86,6 +86,11 @@ public:
                 return;
             }
 
+            // cache now includes null paths, so handle them:
+            if(resolvedPath == "NOT_FOUND") {
+                return;
+            }
+
             FnAttribute::StringAttribute klfFilePath = FnAttribute::StringAttribute(resolvedPath);
 
             interface.setAttr("lookfile.asset", klfFilePath);
