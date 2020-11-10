@@ -1,6 +1,8 @@
 find_package(Turret REQUIRED)
 find_package(ZeroMQ REQUIRED)
 
+set(BOOST_LIBRARY_DIR $ENV{BOOST_ROOT})
+
 find_package(Boost
         COMPONENTS
         filesystem
@@ -8,8 +10,8 @@ find_package(Boost
         REQUIRED
 )
 
-set(TBB_ROOT_DIR $ENV{REZ_TBB_ROOT})
-set(TBB_INCLUDE_DIR $ENV{REZ_TBB_ROOT}/include)
+set(TBB_ROOT_DIR $ENV{TBBROOT})
+set(TBB_INCLUDE_DIR $ENV{TBB_INCLUDE_DIR})
 set(TBB_LIBRARY $ENV{TBB_LIBRARIES})
 
 find_package(TBB REQUIRED COMPONENTS tbb)
