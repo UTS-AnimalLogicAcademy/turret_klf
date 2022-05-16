@@ -2,7 +2,7 @@
 
 name = 'turret_klf'
 
-version = '1.1.13'
+version = '1.1.14'
 
 authors = ['daniel.flood', 'ben.skinner', 'wen.tan', 'naomi.que', 'jonah.newton']
 
@@ -13,6 +13,8 @@ build_requires = [
 ]
 
 variants = [
+    ['platform-linux', 'arch-x86_64', 'katana-3.0.7', 'tbb-4'],
+    ['platform-linux', 'arch-x86_64', 'katana-3.6.2', 'tbb_katana-2017'],
     ['platform-linux', 'arch-x86_64', 'katana-4.5.2', 'tbb_katana-2019.6', 'boost-1.70']
 ]
 
