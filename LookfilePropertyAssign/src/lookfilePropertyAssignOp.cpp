@@ -31,10 +31,10 @@ using namespace std;
 
 #include <FnGeolibServices/FnGeolibCookInterfaceUtilsService.h>
 
-#include <turretClient.h>
+// #include <turretClient.h>
 
 namespace { //anonymous
-    turret_client::turretClient g_turretClient("usd");
+    // turret_client::turretClient g_turretClient("usd");
 
 class LookfilePropertyAssignOp : public Foundry::Katana::GeolibOp
 {
@@ -50,7 +50,7 @@ public:
 
     static void flush()
     {
-        std::cout << "Flushed look file op\n";
+        std::cout << "Flushed look file property assign op\n";
     }
 
     static void cook(Foundry::Katana::GeolibCookInterface & interface)

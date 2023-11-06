@@ -50,7 +50,7 @@ public:
 
     static void flush()
     {
-        std::cout << "Flushed look file op\n";
+        std::cout << "Flushed auto look file op\n";
     }
 
     static void cook(Foundry::Katana::GeolibCookInterface & interface)
