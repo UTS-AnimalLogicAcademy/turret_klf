@@ -1,15 +1,3 @@
-find_package(Turret REQUIRED)
-find_package(ZeroMQ REQUIRED)
-
-set(BOOST_LIBRARY_DIR $ENV{BOOST_ROOT})
-
-find_package(Boost
-        COMPONENTS
-        filesystem
-        serialization
-        REQUIRED
-)
-
 set(TBB_ROOT_DIR $ENV{TBBROOT})
 set(TBB_INCLUDE_DIR $ENV{TBB_INCLUDE_DIR})
 set(TBB_LIBRARY $ENV{TBB_LIBRARIES})
@@ -20,24 +8,33 @@ add_definitions(${TBB_DEFINITIONS})
 include_directories(
         ${TURRET_INCLUDES}
         ${CMAKE_SOURCE_DIR}/LookfilePropertyAssign/
-        ${Boost_INCLUDE_DIRS}
         ${TBB_INCLUDE_DIR}
 )
 
-add_library(LookfilePropertyAssign MODULE src/lookfilePropertyAssignOp.cpp)
+add_library(LookfilePropertyAssignOp MODULE src/lookfilePropertyAssignOp.cpp)
 
-target_link_libraries(LookfilePropertyAssign
+target_link_libraries(LookfilePropertyAssignOp
     PRIVATE
-    ${ZeroMQ_LIBRARY}
-    ${Boost_LIBRARIES}
     ${TBB_LIBRARIES}
-    ${TURRET_LIBRARY}
     Katana::FnAttribute
     Katana::FnGeolibOpPlugin
     Katana::FnGeolibServices
 )
 
-set_target_properties(LookfilePropertyAssign PROPERTIES PREFIX "")
+set_target_properties(LookfilePropertyAssignOp PROPERTIES PREFIX "")
+
+add_library(LookfilePropertyAssignUsdEngine MODULE src/lookfilePropertyAssignUsdEngine.cpp)
+
+target_link_libraries(LookfilePropertyAssignUsdEngine
+    PRIVATE
+    ${TBB_LIBRARIES}
+    Katana::FnPluginSystem
+    Fn::FdkBase
+    Fn::UsdEngine
+)
+set_target_properties(LookfilePropertyAssignUsdEngine PROPERTIES PREFIX "")
 
 install(FILES RegisterLookfilePropertyAssignNode.py DESTINATION Resources/Plugins)
-install(TARGETS LookfilePropertyAssign DESTINATION Resources/Ops)
+install(FILES RegisterLookfilePropertyAssignUSDNode.py DESTINATION Resources/Plugins)
+install(TARGETS LookfilePropertyAssignOp DESTINATION Resources/Ops)
+install(TARGETS LookfilePropertyAssignUsdEngine DESTINATION Resources/Engines)

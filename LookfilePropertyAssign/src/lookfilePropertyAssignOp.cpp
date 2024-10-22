@@ -33,7 +33,7 @@ using namespace std;
 
 // #include <turretClient.h>
 
-namespace { //anonymous
+// namespace { //anonymous
     // turret_client::turretClient g_turretClient("usd");
 
 class LookfilePropertyAssignOp : public Foundry::Katana::GeolibOp
@@ -108,7 +108,7 @@ public:
 
 DEFINE_GEOLIBOP_PLUGIN(LookfilePropertyAssignOp);
 
-} // anonymous
+// } // anonymous
 
 void registerPlugins()
 {
