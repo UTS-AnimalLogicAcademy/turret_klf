@@ -1,5 +1,5 @@
 //
-// Copyright 2019 University of Technology, Sydney
+// Copyright 2024 University of Technology, Sydney
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 // documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -51,24 +51,20 @@ class LookfilePropertyAssignEngine : public Engine
         desc.summary = "Assigns RenderMan cryptomatte properties 'lookfile' and 'assetRoot' to prims in the USD stage";
         return desc;
     }
-
-    usg::LayerRef _customEditLayer;
     
 public:
 
     LookfilePropertyAssignEngine()
     {
+        // Init editLayer (currently segfaulting due to nullptr if not set)
+        _editLayer = usg::Layer::CreateAnonymous("LookfilePropertyAssignEngine:edit");
+
         //register args here
-        _customEditLayer = usg::Layer::CreateAnonymous("LookfilePropertyAssignEngine:editCustom");
     }
 
     ~LookfilePropertyAssignEngine()
     {
         std::cout << "Destroyed look file property assign USD engine\n";
-    }
-
-    usg::LayerRef customEditLayer(){
-        return _customEditLayer;
     }
 
     static void flush()
@@ -85,13 +81,13 @@ protected:
             // Save the current load rules
             usg::Stage::LoadRules currentLoadRules = currentStage->getLoadRules();
 
-            // Load all prims in the stage
+            // Load all prims in the stage - shouldn't be needed if we can get this function to run when new payloads are loaded.
             std::vector<std::pair<usg::Path, usg::Stage::LoadRule>> loadRules;
             loadRules.push_back(std::make_pair(usg::Path("/"), usg::Stage::LoadRule::AllRule));
             currentStage -> setLoadRules(loadRules);
             
             // Create a custom edit layer
-            usg::LayerRef layer = customEditLayer();
+            usg::LayerRef layer = editLayer();
 
             for (usg::Prim prim : currentStage->traverse())
             {
