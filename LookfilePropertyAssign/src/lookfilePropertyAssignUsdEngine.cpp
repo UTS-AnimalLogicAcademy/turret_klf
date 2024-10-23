@@ -64,7 +64,6 @@ public:
 
     ~LookfilePropertyAssignEngine()
     {
-        delete _customEditLayer;
         std::cout << "Destroyed look file property assign USD engine\n";
     }
 
