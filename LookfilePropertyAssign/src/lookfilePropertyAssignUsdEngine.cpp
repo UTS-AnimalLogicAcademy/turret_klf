@@ -51,20 +51,24 @@ class LookfilePropertyAssignEngine : public Engine
         desc.summary = "Assigns RenderMan cryptomatte properties 'lookfile' and 'assetRoot' to prims in the USD stage";
         return desc;
     }
+
+    usg::LayerRef _customEditLayer;
     
 public:
 
     LookfilePropertyAssignEngine()
     {
-        // Init editLayer (currently segfaulting due to nullptr if not set)
-        _editLayer = usg::Layer::CreateAnonymous("LookfilePropertyAssignEngine:editCustom");
-
         //register args here
+        _customEditLayer = usg::Layer::CreateAnonymous("LookfilePropertyAssignEngine:editCustom");
     }
 
     ~LookfilePropertyAssignEngine()
     {
         std::cout << "Destroyed look file property assign USD engine\n";
+    }
+
+    usg::LayerRef customEditLayer(){
+        return _customEditLayer;
     }
 
     static void flush()
@@ -81,13 +85,13 @@ protected:
             // Save the current load rules
             usg::Stage::LoadRules currentLoadRules = currentStage->getLoadRules();
 
-            // Load all prims in the stage - shouldn't be needed if we can get this function to run when new payloads are loaded.
+            // Load all prims in the stage
             std::vector<std::pair<usg::Path, usg::Stage::LoadRule>> loadRules;
             loadRules.push_back(std::make_pair(usg::Path("/"), usg::Stage::LoadRule::AllRule));
             currentStage -> setLoadRules(loadRules);
             
             // Create a custom edit layer
-            usg::LayerRef layer = editLayer();
+            usg::LayerRef layer = customEditLayer();
 
             for (usg::Prim prim : currentStage->traverse())
             {
