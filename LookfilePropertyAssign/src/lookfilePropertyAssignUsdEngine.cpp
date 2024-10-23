@@ -57,7 +57,7 @@ public:
     LookfilePropertyAssignEngine()
     {
         // Init editLayer (currently segfaulting due to nullptr if not set)
-        _editLayer = usg::Layer::CreateAnonymous("LookfilePropertyAssignEngine:edit");
+        _editLayer = usg::Layer::CreateAnonymous("LookfilePropertyAssignEngine:editCustom");
 
         //register args here
     }
