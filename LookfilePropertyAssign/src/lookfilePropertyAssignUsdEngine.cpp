@@ -71,6 +71,10 @@ public:
         return _customEditLayer;
     }
 
+    usg::LayerRef editLayer() override{
+        return _customEditLayer;
+    }
+
     static void flush()
     {
         std::cout << "Flushed look file property assign USD engine\n";
@@ -115,7 +119,12 @@ protected:
                 }
             }
             // Insert the custom edit layer into the engine's root layer
-            rootLayer()->insertSubLayer(layer,0);
+            fdk::StringList currentSubLayers = rootLayer()->getSubLayers();
+            if(std::find(currentSubLayers.begin(), currentSubLayers.end(), layer->getIdentifier()) != currentSubLayers.end()){
+
+            }else{
+                rootLayer()->insertSubLayer(layer,0);
+            }
 
             // Restore the load rules
             currentStage -> setLoadRules(currentLoadRules);
@@ -130,6 +139,14 @@ protected:
             usg::StageRef currentStage = context.stage();
             usg::LayerRef layer = rootLayer();
             currentStage->getRootLayer()->setSubLayers(layer);
+        }
+    }
+
+    void initializeEditLayer(usg::GeomSceneContext &context) override
+    {
+        if (sharedInputEngine(0)){
+            // Clear the custom edit layer
+            customEditLayer()->clear();
         }
     }
 
