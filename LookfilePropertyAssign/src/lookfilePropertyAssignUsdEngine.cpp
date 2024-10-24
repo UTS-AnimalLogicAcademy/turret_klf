@@ -150,6 +150,14 @@ protected:
         }
     }
 
+    void clearEditLayerAuthoredProperties(usg::GeomSceneContext &context) override
+    {
+        if (sharedInputEngine(0)){
+            // Clear the custom edit layer
+            customEditLayer()->clearAuthoredProperties();
+        }
+    }
+
 };
 
 DEFINE_USDENGINE_PLUGIN(LookfilePropertyAssignEngine);
