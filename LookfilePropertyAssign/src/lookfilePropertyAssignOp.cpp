@@ -64,6 +64,8 @@ public:
         if(inputLocationType == "subdmesh") {
             FnAttribute::StringAttribute outputName = interface.getOutputName();
             interface.setAttr("prmanStatements.attributes.user.objectName", outputName);
+
+            interface.setAttr("prmanStatements.attributes.user.objectPath", outputLocationPath);
         }
         
 
