@@ -59,6 +59,9 @@ public:
         FnAttribute::StringAttribute outputLocationPath = interface.getOutputLocationPath();
         FnAttribute::StringAttribute inputLocationPath = interface.getInputLocationPath();
 
+        // Name cryptomatte flashing in renders, adding this to use instead.
+        interface.setAttr("prmanStatements.attributes.user.objectName", outputLocationPath);
+
         std::string query;
 
         if(usdLookFileURI.isValid()) {
