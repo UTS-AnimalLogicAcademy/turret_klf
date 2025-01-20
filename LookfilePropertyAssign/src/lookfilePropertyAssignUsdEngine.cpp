@@ -39,10 +39,6 @@ namespace UPE
 
 class LookfilePropertyAssignEngine : public Engine
 {
-    EnginePtr copy() const override
-    {
-        return EnginePtr(new LookfilePropertyAssignEngine(*this));
-    }
 
     EngineDescription describe() const override
     {
@@ -59,7 +55,7 @@ public:
     LookfilePropertyAssignEngine()
     {
         //register args here
-        _customEditLayer = usg::Layer::CreateAnonymous("LookfilePropertyAssignEngine:editCustom");
+        // _customEditLayer = usg::Layer::CreateAnonymous("LookfilePropertyAssignEngine:editCustom");
     }
 
     ~LookfilePropertyAssignEngine()
@@ -67,13 +63,13 @@ public:
         std::cout << "Destroyed look file property assign USD engine\n";
     }
 
-    usg::LayerRef customEditLayer(){
-        return _customEditLayer;
-    }
+    // usg::LayerRef customEditLayer(){
+    //     return _customEditLayer;
+    // }
 
-    usg::LayerRef editLayer() override{
-        return _customEditLayer;
-    }
+    // usg::LayerRef editLayer() override{
+    //     return _customEditLayer;
+    // }
 
     static void flush()
     {
@@ -84,7 +80,7 @@ protected:
     void process(usg::GeomSceneContext &context) override
     {
         if (sharedInputEngine(0) && context.doGeometryProcessing()){
-            usg::StageRef currentStage = context.stage();
+            usg::StageRef currentStage = editableStage(context);
 
             // Save the current load rules
             usg::Stage::LoadRules currentLoadRules = currentStage->getLoadRules();
@@ -95,7 +91,7 @@ protected:
             currentStage -> setLoadRules(loadRules);
             
             // Create a custom edit layer
-            usg::LayerRef layer = customEditLayer();
+            usg::LayerRef layer = activeStageLayer(context);
 
             for (usg::Prim prim : currentStage->traverse())
             {
@@ -119,12 +115,12 @@ protected:
                 }
             }
             // Insert the custom edit layer into the engine's root layer
-            fdk::StringList currentSubLayers = rootLayer()->getSubLayers();
-            if(std::find(currentSubLayers.begin(), currentSubLayers.end(), layer->getIdentifier()) != currentSubLayers.end()){
+            // fdk::StringList currentSubLayers = rootLayer()->getSubLayers();
+            // if(std::find(currentSubLayers.begin(), currentSubLayers.end(), layer->getIdentifier()) != currentSubLayers.end()){
 
-            }else{
-                rootLayer()->insertSubLayer(layer,0);
-            }
+            // }else{
+            //     rootLayer()->insertSubLayer(layer,0);
+            // }
 
             // Restore the load rules
             currentStage -> setLoadRules(currentLoadRules);
@@ -132,31 +128,31 @@ protected:
         }
     }
 
-    void composeStage(usg::GeomSceneContext &context) override
-    {
-        if (sharedInputEngine(0)){
-            // Insert the edits into the stage root layer
-            usg::StageRef currentStage = context.stage();
-            usg::LayerRef layer = rootLayer();
-            currentStage->getRootLayer()->setSubLayers(layer);
-        }
-    }
+    // void composeStage(usg::GeomSceneContext &context) override
+    // {
+    //     if (sharedInputEngine(0)){
+    //         // Insert the edits into the stage root layer
+    //         usg::StageRef currentStage = context.stage();
+    //         usg::LayerRef layer = rootLayer();
+    //         currentStage->getRootLayer()->setSubLayers(layer);
+    //     }
+    // }
 
-    void initializeEditLayer(usg::GeomSceneContext &context) override
-    {
-        if (sharedInputEngine(0)){
-            // Clear the custom edit layer
-            customEditLayer()->clear();
-        }
-    }
+    // void initializeEditLayer(usg::GeomSceneContext &context) override
+    // {
+    //     if (sharedInputEngine(0)){
+    //         // Clear the custom edit layer
+    //         customEditLayer()->clear();
+    //     }
+    // }
 
-    void clearEditLayerAuthoredProperties(usg::GeomSceneContext &context) override
-    {
-        if (sharedInputEngine(0)){
-            // Clear the custom edit layer
-            customEditLayer()->clearAuthoredProperties();
-        }
-    }
+    // void clearEditLayerAuthoredProperties(usg::GeomSceneContext &context) override
+    // {
+    //     if (sharedInputEngine(0)){
+    //         // Clear the custom edit layer
+    //         customEditLayer()->clearAuthoredProperties();
+    //     }
+    // }
 
 };
 

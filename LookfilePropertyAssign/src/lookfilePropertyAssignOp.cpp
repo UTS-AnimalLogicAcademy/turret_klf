@@ -60,7 +60,7 @@ public:
         std::string inputLocationPath = interface.getInputLocationPath();
         std::string inputLocationType = GetInputLocationType(interface, inputLocationPath);
 
-        // Name cryptomatte flashing in renders, adding this to use instead.
+        // Name & path cryptomattes flashing in renders, adding these to use instead.
         if(inputLocationType == "subdmesh") {
             FnAttribute::StringAttribute outputName = interface.getOutputName();
             interface.setAttr("prmanStatements.attributes.user.objectName", outputName);

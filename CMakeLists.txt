@@ -12,6 +12,8 @@ set(KATANA_HOME "$ENV{KATANA_HOME}" CACHE PATH "Path to Katana")
 
 set(KATANA_ROOT "${KATANA_HOME}")
 
+set(FnUsdAbstraction_DIR "${KATANA_HOME}/plugin_apis/cmake")
+
 find_package(Katana PATHS "${KATANA_HOME}/plugin_apis/cmake" REQUIRED)
 find_package(FdkBase PATHS "${KATANA_HOME}/plugin_apis/cmake" REQUIRED)
 find_package(FnUsdEngine PATHS "${KATANA_HOME}/plugin_apis/cmake" REQUIRED)
