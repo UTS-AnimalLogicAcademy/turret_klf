@@ -23,18 +23,20 @@ target_link_libraries(LookfilePropertyAssignOp
 
 set_target_properties(LookfilePropertyAssignOp PROPERTIES PREFIX "")
 
-add_library(LookfilePropertyAssignUsdEngine MODULE src/lookfilePropertyAssignUsdEngine.cpp)
-
-target_link_libraries(LookfilePropertyAssignUsdEngine
-    PRIVATE
-    ${TBB_LIBRARIES}
-    Katana::FnPluginSystem
-    Fn::FdkBase
-    Fn::UsdEngine
-)
-set_target_properties(LookfilePropertyAssignUsdEngine PROPERTIES PREFIX "")
-
 install(FILES RegisterLookfilePropertyAssignNode.py DESTINATION Resources/Plugins)
-install(FILES RegisterLookfilePropertyAssignUSDNode.py DESTINATION Resources/Plugins)
 install(TARGETS LookfilePropertyAssignOp DESTINATION Resources/Ops)
-install(TARGETS LookfilePropertyAssignUsdEngine DESTINATION Resources/Engines)
+
+if(TURRET_KLF_BUILD_USD_ENGINE)
+    add_library(LookfilePropertyAssignUsdEngine MODULE src/lookfilePropertyAssignUsdEngine.cpp)
+
+    target_link_libraries(LookfilePropertyAssignUsdEngine
+        PRIVATE
+        ${TBB_LIBRARIES}
+        Katana::FnPluginSystem
+        Fn::FdkBase
+        Fn::UsdEngine
+    )
+    set_target_properties(LookfilePropertyAssignUsdEngine PROPERTIES PREFIX "")
+    install(FILES RegisterLookfilePropertyAssignUSDNode.py DESTINATION Resources/Plugins)
+    install(TARGETS LookfilePropertyAssignUsdEngine DESTINATION Resources/Engines)
+endif()
